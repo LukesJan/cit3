@@ -5,7 +5,7 @@ const path = require("path");
 const app = express();
 
 // Připojení k MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/blogdb")
+mongoose.connect("mongodb://localhost:27017/webnews")
     .then(() => console.log("✅ Připojeno k MongoDB"))
     .catch(err => console.error("❌ Chyba připojení:", err));
 
