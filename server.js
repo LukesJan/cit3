@@ -15,18 +15,18 @@ const Idnes = mongoose.model("idnes", new mongoose.Schema({
     Date: Date
 }, { collection: "idnes" }));
 
-// Statick   soubory (index.html)
+
 app.use(express.static(path.join(__dirname, "public")));
 
 
 app.get("/api/posts", async (req, res) => {
     try {
-        // MongoDB vybere p ^y  mo jeden n  hodn   dokument
+
         const [post] = await Idnes.aggregate([{ $sample: { size: 1 } }]);
 
         if (!post) return res.status(404).json({ message: "    dn    ^ml  nky nenalezeny" });
 
-        // Pos  l  me st  le pole, ale jen s jedn  m  ^ml  nkem
+
         res.json([post]);
     } catch (err) {
         console.error(err);
@@ -34,6 +34,6 @@ app.get("/api/posts", async (req, res) => {
     }
 });
 
-// Spu  t ^{n   serveru
+
 const PORT = 8080;
 app.listen(PORT, () => console.log(` ^=^z^` `Server b ^{     na http://localhost:${PORT}`));
