@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iDNES články</title>
+  <title>iDNES  ^ml  nky</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -24,11 +24,15 @@
       color: gray;
       font-size: 0.9em;
     }
+    .date {
+      color: gray;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
-<h1>iDNES články</h1>
-<div id="posts">Načítání...</div>
+<h1>iDNES  ^ml  nky</h1>
+<div id="posts">Na ^m  t  n  ...</div>
 
 <script>
   async function loadPosts() {
@@ -39,13 +43,15 @@
     container.innerHTML = posts.map(p => `
         <div class="post">
           <h2>${p.Title}</h2>
-          <p>${p.Content}</p>
+                    <p>${p.Content}</p>
           <p class="date">${new Date(p.Date).toLocaleString()}</p>
         </div>
       `).join("");
   }
 
   loadPosts();
+
+  setInterval(loadPosts, 300000);
 </script>
 </body>
 </html>
