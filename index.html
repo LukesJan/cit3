@@ -3,33 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Můj Blog</title>
-  <link rel="stylesheet" href="style.css">
+  <title>iDNES články</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .post {
+      background: white;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .date {
+      color: gray;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>📝 Můj Blog</h1>
-  <p>Jednoduchý blog vytvořený v HTML, CSS a JavaScriptu</p>
-</header>
+<h1>iDNES články</h1>
+<div id="posts">Načítání...</div>
 
-<main>
-  <section id="new-post">
-    <h2>Přidat nový příspěvek</h2>
-    <input type="text" id="title" placeholder="Název příspěvku">
-    <textarea id="content" placeholder="Text příspěvku"></textarea>
-    <button id="addPost">Přidat</button>
-  </section>
+<script>
+  async function loadPosts() {
+    const res = await fetch("/api/posts");
+    const posts = await res.json();
 
-  <section id="posts">
-    <h2>Publikované příspěvky</h2>
-    <div id="postList"></div>
-  </section>
-</main>
+    const container = document.getElementById("posts");
+    container.innerHTML = posts.map(p => `
+        <div class="post">
+          <h2>${p.Title}</h2>
+          <p>${p.Content}</p>
+          <p class="date">${new Date(p.Date).toLocaleString()}</p>
+        </div>
+      `).join("");
+  }
 
-<footer>
-  <p>© 2025 Můj Blog | Vytvořeno pomocí HTML, CSS a JavaScriptu</p>
-</footer>
-
-<script src="script.js"></script>
+  loadPosts();
+</script>
 </body>
 </html>
